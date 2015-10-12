@@ -1616,4 +1616,26 @@ class InsightlyRequest{
       return $querystring;
     }
   }
+
+  /**
+   * Adds a lead
+   *
+   * @param stdClass $lead
+   * @return mixed
+   * @link https://api.insight.ly/v2.1/Help/Api/POST-Leads
+   */
+  public function addLead($leads) {
+    $url_path = "/v2.1/Leads";
+    $request = null;
+
+    if (isset($leads->LEAD_ID))
+    {
+        $request = $this->PUT($url_path);
+    } else {
+        $request = $this->POST($url_path);
+    }
+
+    return $request->body($leads)->asJSON();
+  }
+
 }
